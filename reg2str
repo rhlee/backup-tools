@@ -1,0 +1,16 @@
+#!/usr/bin/python
+import sys
+import re
+import binascii
+
+pr = sys.stdout.write
+
+f = open(sys.argv[1], 'r')
+
+for line in f:
+  match = re.match('(.*hex.*:)((..),00,(..),00.*)',line)
+  if match and match.group(3) != '00' and match.group(4) != '00':
+    pr(match.group(1))
+    pr(binascii.unhexlify(match.group(2).replace(',00','').replace(',','')))
+  else:
+    pr(line)
