@@ -2,9 +2,7 @@
 FILES=$(find .)
 for f in $FILES
 do
-  attrib=$(attrib $f)
-  echo $attrib
-  if [[ "$attrib" =~ H.*: ]]
+  if [[ "$(attrib $f)" =~ H.*: ]]
   then
     echo $f
   fi
